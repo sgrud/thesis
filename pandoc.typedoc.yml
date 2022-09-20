@@ -1,0 +1,8 @@
+template: res/typedoc.tex
+
+output-file: dist/typedoc.tex
+from: markdown
+to: latex
+
+highlight-style: pygments
+top-level-division: section

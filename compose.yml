@@ -1,0 +1,47 @@
+version: '3'
+
+x-anchor:
+  depends: &depends
+    condition: service_completed_successfully
+  service: &service
+    entrypoint: sh -x -c
+    network_mode: bridge
+    user: $COMPOSE_PROJECT_USER
+    volumes: [.:/mnt/repo]
+    working_dir: /mnt/repo
+
+services:
+  typedoc:
+    <<: *service
+    image: node:latest
+    command:
+      - |
+        cd $$(mktemp -d)
+        git clone -b "$SGRUD_TAG" "$SGRUD_GIT" .
+
+        npm pack /mnt/repo/res/typedoc-theme
+        npm install *.tgz
+        npm install
+
+        npx typedoc \
+          --githubPages false \
+          --out /mnt/repo/dist \
+          --plugin typedoc-plugin-markdown \
+          --plugin @sgrud/typedoc-plugin \
+          --plugin @sgrud/typedoc-theme
+
+  latex:
+    <<: *service
+    build: res/pandoc-custom
+    image: pandoc/custom:latest
+    command: [pandoc -d pandoc.typedoc.yml dist/typedoc.md]
+    depends_on:
+      typedoc: *depends
+
+  thesis:
+    <<: *service
+    build: res/pandoc-custom
+    image: pandoc/custom:latest
+    command: [pandoc -d pandoc.thesis.yml $$(find src -name '*.md' | sort)]
+    depends_on:
+      latex: *depends

@@ -1,0 +1,41 @@
+include-in-header: res/settings.tex
+include-after-body: dist/typedoc.tex
+resource-path: [src]
+
+output-file: dist/thesis.pdf
+pdf-engine: xelatex
+from: markdown
+to: pdf
+
+citeproc: true
+cite-method: citeproc
+
+highlight-style: pygments
+reference-location: block
+top-level-division: chapter
+
+metadata:
+  lang: en
+  documentclass: report
+  classoption:
+    - notitlepage
+    - onecolumn
+    - openany
+
+  lof: true
+  lot: true
+  toc: true
+  toc-depth: 2
+
+  fontsize: 12pt
+  linestretch: 1.5
+  mainfont: DejaVuSerif
+  monofont: DejaVuSansMono
+  sansfont: DejaVuSans
+  geometry:
+    - a4paper
+    - top=25mm
+    - bottom=25mm
+    - inner=25mm
+    - outer=25mm
+    - bindingoffset=10mm
