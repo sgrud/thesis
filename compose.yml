@@ -11,17 +11,15 @@ x-anchor:
     working_dir: /mnt/repo
 
 services:
-  typedoc:
+  typedoc.md:
     <<: *service
     image: node:latest
     command:
       - |
         cd $$(mktemp -d)
         git clone -b "$SGRUD_TAG" "$SGRUD_GIT" .
-
         npm pack /mnt/repo/res/typedoc-theme
-        npm install *.tgz
-        npm install
+        npm install *.tgz && npm install
 
         npx typedoc \
           --githubPages false \
@@ -30,18 +28,18 @@ services:
           --plugin @sgrud/typedoc-plugin \
           --plugin @sgrud/typedoc-theme
 
-  latex:
+  typedoc.tex:
     <<: *service
     build: res/pandoc-custom
     image: pandoc/custom:latest
     command: [pandoc -d pandoc.typedoc.yml dist/typedoc.md]
     depends_on:
-      typedoc: *depends
+      typedoc.md: *depends
 
-  thesis:
+  thesis.pdf:
     <<: *service
     build: res/pandoc-custom
     image: pandoc/custom:latest
     command: [pandoc -d pandoc.thesis.yml $$(find src -name '*.md' | sort)]
     depends_on:
-      latex: *depends
+      typedoc.tex: *depends
