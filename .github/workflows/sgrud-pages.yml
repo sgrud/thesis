@@ -1,0 +1,45 @@
+name: SGRUD Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  thesis:
+    name: Thesis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+        with:
+          path: ./source
+
+      - name: Checkout target
+        uses: actions/checkout@v2
+        with:
+          path: ./target
+          repository: sgrud/sgrud.github.io
+          ssh-key: ${{secrets.PAGES_DEPLOY_KEY}}
+
+      - name: Build source
+        working-directory: ./source
+        run: |
+          mkdir ./thesis
+          cp ./README.md ./thesis
+
+          export COMPOSE_PROJECT_USER=$(id -u):$(id -g)
+          docker-compose up --quiet-pull || docker-compose logs
+
+          cp ./dist/thesis.pdf ./thesis
+          git --git-dir ../target/.git add -Af ./thesis
+
+      - name: Push target
+        working-directory: ./target
+        run: |
+          git diff --cached --quiet && exit
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+          git commit -m ${{github.repository}}@${{github.sha}}
+          git push
