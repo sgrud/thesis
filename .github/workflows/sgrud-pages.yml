@@ -27,12 +27,8 @@ jobs:
         working-directory: ./source
         run: |
           mkdir ./thesis
-          cp ./README.md ./thesis
-
-          export COMPOSE_PROJECT_USER=$(id -u):$(id -g)
-          docker-compose up --quiet-pull || docker-compose logs
-
-          cp ./dist/thesis.pdf ./thesis
+          docker-compose up || docker-compose logs
+          cp ./dist/thesis.pdf ./README.md ./thesis
           git --git-dir ../target/.git add -Af ./thesis
 
       - name: Push target

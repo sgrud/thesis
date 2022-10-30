@@ -4,9 +4,8 @@ x-anchor:
   depends: &depends
     condition: service_completed_successfully
   service: &service
-    entrypoint: sh -x -c
+    entrypoint: sh -e -c
     network_mode: bridge
-    user: $COMPOSE_PROJECT_USER
     volumes: [.:/mnt/repo]
     working_dir: /mnt/repo
 
