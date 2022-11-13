@@ -24,7 +24,7 @@ services:
           --githubPages false \
           --out /mnt/repo/dist \
           --plugin typedoc-plugin-markdown \
-          --plugin @sgrud/typedoc-plugin \
+          --plugin typedoc-plugin-mdn-links \
           --plugin @sgrud/typedoc-theme
 
   typedoc.tex:
