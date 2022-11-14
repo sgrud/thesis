@@ -25,7 +25,11 @@ services:
           --out /mnt/repo/dist \
           --plugin typedoc-plugin-markdown \
           --plugin typedoc-plugin-mdn-links \
-          --plugin @sgrud/typedoc-theme
+          --plugin @sgrud/typedoc-theme \
+
+        sed -i /mnt/repo/dist/typedoc.md \
+          -e 's|\\>\\>|\\>⁠\\>|g' \
+          -e 's|\$$|\\$$|g'
 
   typedoc.tex:
     <<: *service
