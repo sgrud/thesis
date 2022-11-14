@@ -1,10 +1,20 @@
+const { helpers } = require('handlebars');
 const { ReflectionKind, UrlMapping } = require('typedoc');
 const { MarkdownTheme } = require('typedoc-plugin-markdown');
+const utils = require('typedoc-plugin-markdown/dist/utils');
 
 exports.load = (app) => app.renderer.theme = new class extends MarkdownTheme {
 
   constructor(renderer) {
     super(renderer);
+
+    const { escapeChars } = utils; utils.escapeChars = function(...args) {
+      return escapeChars.apply(this, args).replace(/\$/g, '\\$');
+    }
+
+    const { type } = helpers; helpers.type = function(...args) {
+      return type.apply(this, args).replace(/\\>\\>/g, '\\>⁠\\>');
+    }
 
     this.entryDocument = 'typedoc.md';
     this.template = this.getReflectionMemberTemplate();
