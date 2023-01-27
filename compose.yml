@@ -22,6 +22,7 @@ services:
 
         npx typedoc \
           --githubPages false \
+          --gitRevision "$SGRUD_TAG" \
           --out /mnt/repo/dist \
           --plugin typedoc-plugin-markdown \
           --plugin typedoc-plugin-mdn-links \
