@@ -2,13 +2,9 @@ include-in-header: res/settings.tex
 include-after-body: dist/typedoc.tex
 resource-path: [src]
 
-output-file: dist/thesis.pdf
-pdf-engine: xelatex
-from: markdown
-to: pdf
-
 citeproc: true
 cite-method: citeproc
+pdf-engine: xelatex
 
 highlight-style: pygments
 reference-location: block

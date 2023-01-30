@@ -1,8 +1,15 @@
 \usepackage{float}
-\floatplacement{figure}{H}
+\usepackage{makeidx}
 
+\floatplacement{figure}{H}
 \hyphenation{}
+\makeindex
 \raggedbottom
+
+
+\makeatletter
+\def\@idxitem{\scriptsize\par}
+\makeatother
 
 \binoppenalty=700
 \brokenpenalty=100

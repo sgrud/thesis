@@ -27,6 +27,22 @@ exports.load = (app) => app.renderer.theme = new class extends MarkdownTheme {
     this.urls = [];
   }
 
+  getMeta(reflection) {
+    let { name, parent } = reflection;
+
+    while (parent && parent.kind !== ReflectionKind.Project) {
+      name = `${parent.name}.${name}`;
+      parent = parent.parent;
+    }
+
+    const index = reflection.name.replace(/^_/, '');
+    const label = `\\textbf{\\detokenize{${index}}}`;
+    const level = name.split('.').slice(0, -1).join('.');
+    const refer = `\\detokenize{${level || 'global'}}`;
+
+    return `\n\\index{${index}@${label}!${refer}}\n\\label{${name}}`;
+  }
+
   getUrls(reflection, urls = this.urls) {
     if (reflection.kind !== ReflectionKind.Project) {
       reflection.anchor = this.getUrl(reflection);
@@ -50,7 +66,15 @@ exports.load = (app) => app.renderer.theme = new class extends MarkdownTheme {
 
   render(page) {
     this.hidePageTitle = page.model.kind !== ReflectionKind.Module;
-    this.spooler.push(super.render(page));
+
+    const render = super.render(page);
+    const splice = /(?<=^##.*$)/m.exec(render).index;
+
+    this.spooler.push([
+      render.substring(0, splice),
+      this.getMeta(page.model),
+      render.substring(splice),
+    ].join(''));
 
     return page.model === this.urls[this.urls.length - 1]?.model
       ? this.spooler.join('\n')

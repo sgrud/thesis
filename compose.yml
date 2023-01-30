@@ -10,7 +10,7 @@ x-anchor:
     working_dir: /mnt/repo
 
 services:
-  typedoc.md:
+  typedoc:
     <<: *service
     image: node:latest
     command:
@@ -29,18 +29,17 @@ services:
           --plugin @sgrud/typedoc-plugin \
           --plugin @sgrud/typedoc-theme
 
-  typedoc.tex:
+  pandoc:
     <<: *service
     build: res/pandoc-custom
+    depends_on: {typedoc: *depends}
     image: pandoc/custom:latest
-    command: [pandoc -d pandoc.typedoc.yml dist/typedoc.md]
-    depends_on:
-      typedoc.md: *depends
+    command:
+      - |
+        FILES=$$(find src -name '*.md' | sort)
 
-  thesis.pdf:
-    <<: *service
-    build: res/pandoc-custom
-    image: pandoc/custom:latest
-    command: [pandoc -d pandoc.thesis.yml $$(find src -name '*.md' | sort)]
-    depends_on:
-      typedoc.tex: *depends
+        pandoc -d pandoc.typedoc.yml dist/typedoc.md
+        pandoc -d pandoc.thesis.yml -o dist/thesis.tex $$FILES
+        xelatex -no-pdf -output-directory dist dist/thesis.tex
+        makeindex -i -l -r <dist/thesis.idx >>dist/typedoc.tex
+        pandoc -d pandoc.thesis.yml -o dist/thesis.pdf $$FILES
