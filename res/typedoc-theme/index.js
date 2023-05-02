@@ -40,7 +40,7 @@ exports.load = (app) => app.renderer.theme = new class extends MarkdownTheme {
     const level = name.split('.').slice(0, -1).join('.');
     const refer = `\\detokenize{${level || 'global'}}`;
 
-    return `[]{#${anchor}}\n\\index{${index}@${label}!${refer}}`;
+    return ` []{#${anchor}}\n\\index{${index}@${label}!${refer}}`;
   }
 
   getUrls(reflection, urls = this.urls) {
