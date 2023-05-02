@@ -27,7 +27,7 @@ jobs:
         working-directory: ./source
         run: |
           mkdir ./thesis
-          docker-compose up || docker-compose logs
+          docker compose up --no-log-prefix
           cp ./dist/thesis.pdf ./README.md ./thesis
           git --git-dir ../target/.git add -Af ./thesis
 
