@@ -28,7 +28,7 @@ exports.load = (app) => app.renderer.theme = new class extends MarkdownTheme {
   }
 
   getMeta(reflection) {
-    let { name, parent } = reflection;
+    let { anchor, name, parent } = reflection;
 
     while (parent && parent.kind !== ReflectionKind.Project) {
       name = `${parent.name}.${name}`;
@@ -40,7 +40,7 @@ exports.load = (app) => app.renderer.theme = new class extends MarkdownTheme {
     const level = name.split('.').slice(0, -1).join('.');
     const refer = `\\detokenize{${level || 'global'}}`;
 
-    return `\n\\index{${index}@${label}!${refer}}\n\\label{${name}}`;
+    return `[]{#${anchor}}\n\\index{${index}@${label}!${refer}}`;
   }
 
   getUrls(reflection, urls = this.urls) {
@@ -64,10 +64,10 @@ exports.load = (app) => app.renderer.theme = new class extends MarkdownTheme {
     return urls;
   }
 
-  render(page) {
+  render(page, template) {
     this.hidePageTitle = page.model.kind !== ReflectionKind.Module;
 
-    const render = super.render(page);
+    const render = super.render(page, template);
     const splice = /(?<=^##.*$)/m.exec(render).index;
 
     this.spooler.push([
