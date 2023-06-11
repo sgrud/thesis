@@ -29,6 +29,10 @@ jobs:
           mkdir ./thesis
           docker compose up --no-log-prefix
           cp ./dist/thesis.pdf ./README.md ./thesis
+
+      - name: Stage source
+        working-directory: ./source
+        run: |
           git --git-dir ../target/.git add -Af ./thesis
 
       - name: Push target
