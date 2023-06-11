@@ -16,23 +16,38 @@ services:
     command:
       - |
         cd $$(mktemp -d)
-        git clone -b "$SGRUD_TAG" "$SGRUD_GIT" .
+        git clone -b $SGRUD_TAG $SGRUD_GIT .
         npm pack /mnt/repo/res/typedoc-theme
         npm install *.tgz && npm install
 
         npx typedoc \
           --githubPages false \
-          --gitRevision "$SGRUD_TAG" \
+          --gitRevision $SGRUD_TAG \
           --plugin typedoc-plugin-markdown \
           --plugin typedoc-plugin-mdn-links \
           --plugin @sgrud/typedoc-plugin \
           --plugin @sgrud/typedoc-theme \
           --out /mnt/repo/dist
 
+  jest:
+    <<: *service
+    depends_on: {typedoc: *depends}
+    image: node:latest
+    command:
+      - |
+        cd $$(mktemp -d)
+        git clone -b $SGRUD_TAG $SGRUD_GIT .
+        npm install && npm run build
+
+        npx jest --coverage --testPathIgnorePatterns /worker/ | sed -E \
+          -e 's/^  /\\hspace{5mm}/g' -e 's/^ /\\hspace{2.5mm}/g' \
+          -e '1s/.*/\n\\newpage\n\n# Test Coverage\n/;$$d' \
+        >>/mnt/repo/dist/typedoc.md
+
   pandoc:
     <<: *service
     build: res/pandoc-custom
-    depends_on: {typedoc: *depends}
+    depends_on: {jest: *depends}
     image: pandoc/custom:latest
     command:
       - |
