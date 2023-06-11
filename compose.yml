@@ -41,5 +41,6 @@ services:
         pandoc -d pandoc.typedoc.yml dist/typedoc.md
         pandoc -d pandoc.thesis.yml -o dist/thesis.tex $$FILES
         xelatex -no-pdf -output-directory dist dist/thesis.tex
+        xelatex -no-pdf -output-directory dist dist/thesis.tex
         makeindex -i -l -r <dist/thesis.idx >>dist/typedoc.tex
         pandoc -d pandoc.thesis.yml -o dist/thesis.pdf $$FILES
