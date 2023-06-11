@@ -1,26 +1,40 @@
+\usepackage{fancyhdr}
 \usepackage{float}
 \usepackage{makeidx}
+\usepackage{varwidth}
 
+\batchmode
+\catcode`\⁠ = 9
 \floatplacement{figure}{H}
 \hyphenation{}
 \makeindex
-\raggedbottom
-
 
 \makeatletter
-\def\@idxitem{\scriptsize\par}
+  \def\@idxitem{\scriptsize\par}
 \makeatother
 
-\binoppenalty=700
-\brokenpenalty=100
-\clubpenalty=150
-\displaywidowpenalty=50
-\exhyphenpenalty=50
-\floatingpenalty=20000
-\hyphenpenalty=50
-\interlinepenalty=0
-\linepenalty=10
-\postdisplaypenalty=0
-\predisplaypenalty=10000
-\relpenalty=500
-\widowpenalty=150
+\fancyhead[LE,LO]{\MakeUppercase{\thetitle}}
+\fancyhead[RE,RO]{\leftmark}
+\fancypagestyle{plain}{}
+\pagestyle{fancy}
+
+\let\maketitlecommand\maketitle
+\renewcommand{\maketitle}[1]{
+  \maketitlecommand
+  \thispagestyle{empty}
+}
+
+\let\tableofcontentscommand\tableofcontents
+\renewcommand{\tableofcontents}{
+  \let\hypertargetcommand\hypertarget
+  \renewcommand{\hypertarget}[2]{}
+  \tableofcontentscommand
+  \renewcommand{\hypertarget}[2]{\hypertargetcommand{##1}{##2}}
+}
+
+\let\titlecommand\title
+\newcommand{\thetitle}{}
+\renewcommand{\title}[1]{
+  \renewcommand{\thetitle}{#1}
+  \titlecommand{#1}
+}

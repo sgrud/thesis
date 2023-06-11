@@ -1,0 +1,281 @@
+{{#with model}}
+
+{{!---------------------------------------------------------------------------}}
+
+{{#*inline "template"}}
+
+{{> comment}}
+
+**`Signature`**\nopagebreak
+
+`\begin{ttfamily}`{=tex}
+`\renewcommand{\bfdefault}{m}`{=tex}
+
+{{{signature param}}}
+
+`\renewcommand{\bfdefault}{b}`{=tex}
+`\end{ttfamily}`{=tex}
+
+{{#ifShowReturns}}
+
+{{#if (returns comment)}}
+
+**`Returns`**\nopagebreak
+
+{{{returns comment}}}
+
+{{/if}}{{!if (returns comment)}}
+
+{{/ifShowReturns}}{{!ifShowReturns}}
+
+{{#if typeParameters}}
+
+**`Type parameters`**\nopagebreak
+
+{{#with typeParameters}}
+
+{{{typeParameterTable}}}
+
+{{/with}}{{!with typeParameters}}
+
+{{/if}}{{!if typeParameters}}
+
+{{#if parameters}}
+
+**`Parameters`**\nopagebreak
+
+{{#with parameters}}
+
+{{{parameterTable}}}
+
+{{/with}}{{!with parameters}}
+
+{{/if}}{{!if parameters}}
+
+{{/inline}}{{!*inline "signature"}}
+
+{{!---------------------------------------------------------------------------}}
+
+{{#unless parent.parent}}
+
+\newpage
+
+{{{depth}}} [{{{name}}} {{{kind}}}]{# {{~{anchor}~}} }
+`\index{`{=tex}{{{name}}}@\textbf{ {{~{name}~}} }`!`{=tex}{{{parents}}}`}`{=tex}
+
+{{else}}{{!unless parent.parent}}
+
+\vspace{10mm}
+
+{{{parents}}}.{{!--
+
+--}}`\begin{varwidth}{\textwidth}`{=tex}
+
+{{{depth}}} [{{{name}}}]{# {{~{anchor}~}} }
+`\index{`{=tex}{{{name}}}@\textbf{ {{~{name}~}} }`!`{=tex}{{{parents}}}`}`{=tex}
+
+`\end{varwidth}`{=tex}{{!--
+
+--}} \textit{({{{kind}}})}
+
+\nopagebreak
+
+{{/unless}}{{!unless parent.parent}}
+
+{{!---------------------------------------------------------------------------}}
+
+{{> comment}}
+
+{{#if signatures}}
+
+{{#each signatures}}
+
+{{> template}}
+
+{{/each}}{{!each signatures}}
+
+{{else}}{{!if signatures}}
+
+{{#if hasGetterOrSetter}}
+
+{{#if getSignature}}
+
+{{#with getSignature}}
+
+{{> template param="get"}}
+
+{{/with}}{{!with getSignature}}
+
+{{/if}}{{!if getSignature}}
+
+{{#if setSignature}}
+
+{{#with setSignature}}
+
+{{> template param="set"}}
+
+{{/with}}{{!with setSignature}}
+
+{{/if}}{{!if setSignature}}
+
+{{else}}{{!if hasGetterOrSetter}}
+
+{{#ifIsReference}}
+
+{{referenceMember}}
+
+{{else}}{{!ifIsReference}}
+
+{{#if typeParameters}}
+
+**`Type parameters`**\nopagebreak
+
+{{#with typeParameters}}
+
+{{{typeParameterTable}}}
+
+{{/with}}{{!with typeParameters}}
+
+{{/if}}{{!if typeParameters}}
+
+{{#if type.declaration}}
+
+{{#if type.declaration.indexSignature}}
+
+{{#with type.declaration.indexSignature}}
+
+**`Index signature`**\nopagebreak
+
+{{{indexSignatureTitle}}}
+
+{{> comment}}
+
+{{/with}}{{!with type.declaration.indexSignature}}
+
+{{/if}}{{!if type.declaration.indexSignature}}
+
+{{#if type.declaration.signatures}}
+
+{{#if type.declaration.children}}
+
+**`Call signature`**\nopagebreak
+
+{{else}}{{!if type.declaration.children}}
+
+**`Type declaration`**\nopagebreak
+
+{{/if}}{{!if type.declaration.children}}
+
+{{#each type.declaration.signatures}}
+
+{{> template}}
+
+{{/each}}{{!each type.declaration.signatures}}
+
+{{/if}}{{!if type.declaration.signatures}}
+
+{{#if type.declaration.children}}
+
+**`Type declaration`**\nopagebreak
+
+{{#with type.declaration.children}}
+
+{{{typeDeclarationMembers}}}
+
+{{/with}}{{!with type.declaration.children}}
+
+{{/if}}{{!if type.declaration.children}}
+
+{{/if}}{{!if type.declaration}}
+
+{{/ifIsReference}}{{!ifIsReference}}
+
+{{/if}}{{!if hasGetterOrSetter}}
+
+{{/if}}{{!if signatures}}
+
+{{!---------------------------------------------------------------------------}}
+
+{{#if typeHierarchy.next}}
+
+**`Hierarchy`**\nopagebreak
+
+{{#with typeHierarchy}}
+
+{{{hierarchy}}}
+
+{{/with}}{{!with typeHierarchy}}
+
+{{/if}}{{!if typeHierarchy.next}}
+
+{{!---------------------------------------------------------------------------}}
+
+{{#if implementedTypes}}
+
+**`Implements`**\nopagebreak
+
+{{#each implementedTypes}}{{!--
+
+--}}{{{type}}}{{!--
+
+--}}{{#unless @last}}{{!--
+
+--}}, {{!--
+
+--}}{{/unless}}{{!unless @last}}{{!--
+
+--}}{{/each}}{{!each implementedTypes}}
+
+{{/if}}{{!if implementedTypes}}
+
+{{!---------------------------------------------------------------------------}}
+
+{{#if implementedBy}}
+
+**`Implemented by`**\nopagebreak
+
+{{#each implementedBy}}{{!--
+
+--}}{{{type}}}{{!--
+
+--}}{{#unless @last}}{{!--
+
+--}}, {{!--
+
+--}}{{/unless}}{{!unless @last}}{{!--
+
+--}}{{/each}}{{!each implementedBy}}
+
+{{/if}}{{!if implementedBy}}
+
+{{!---------------------------------------------------------------------------}}
+
+{{#if sources}}
+
+**`Source`**\nopagebreak
+
+{{#each sources}}{{!--
+
+--}}{{#if url}}{{!--
+
+--}}[{{fileName}}:{{line}}]({{url}}){{!--
+
+--}}{{else}}{{!if url}}{{!--
+
+--}}{{fileName}}:{{line}}{{!--
+
+--}}{{/if}}{{!if url}}{{!--
+
+--}}{{#unless @last}}{{!--
+
+--}}, {{!--
+
+--}}{{/unless}}{{!unless @last}}{{!--
+
+--}}{{/each}}{{!each sources}}
+
+{{/if}}{{!if sources}}
+
+{{!---------------------------------------------------------------------------}}
+
+{{/with}}{{!with model}}

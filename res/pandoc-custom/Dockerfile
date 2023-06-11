@@ -1,2 +1,2 @@
 FROM pandoc/latex:latest
-RUN apk add font-liberation
+RUN apk add font-liberation && tlmgr install varwidth
