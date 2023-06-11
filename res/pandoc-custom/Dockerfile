@@ -1,2 +1,2 @@
 FROM pandoc/latex:latest
-RUN apk add ttf-dejavu
+RUN apk add font-liberation

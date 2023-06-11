@@ -5,9 +5,6 @@ resource-path: [src]
 citeproc: true
 cite-method: citeproc
 pdf-engine: xelatex
-
-highlight-style: pygments
-reference-location: block
 top-level-division: chapter
 
 metadata:
@@ -15,23 +12,25 @@ metadata:
   documentclass: report
   classoption:
     - notitlepage
-    - onecolumn
-    - openany
+    # - twoside
 
-  lof: true
-  lot: true
-  toc: true
-  toc-depth: 2
-
-  fontsize: 12pt
-  linestretch: 1.5
-  mainfont: DejaVuSerif
-  monofont: DejaVuSansMono
-  sansfont: DejaVuSans
   geometry:
     - a4paper
     - top=25mm
     - bottom=25mm
     - inner=25mm
     - outer=25mm
-    - bindingoffset=10mm
+    # - bindingoffset=10mm
+    - headheight=5.25mm
+
+  fontsize: 12pt
+  linestretch: 1.5
+  mainfont: LiberationSerif
+  monofont: LiberationMono
+  sansfont: LiberationSans
+
+  toc: true
+  toc-depth: 1
+
+variables:
+  block-headings: true
