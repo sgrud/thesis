@@ -131,7 +131,7 @@ exports.load = (app) => app.renderer.theme = new class extends MarkdownTheme {
   }
 
   getUrls(reflection, urls = this.urls) {
-    if (!reflection.kindOf(ReflectionKind.Project)) {
+    if (reflection.sources) {
       reflection.anchor = this.getUrl(reflection);
       reflection.url = '#' + reflection.anchor;
 
