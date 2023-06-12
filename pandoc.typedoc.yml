@@ -6,3 +6,9 @@ to: latex
 
 columns: 1
 top-level-division: section
+
+syntax-definition:
+  - /opt/syntax/html.xml
+  - /opt/syntax/javascript.xml
+  - /opt/syntax/typescript.xml
+  - /opt/syntax/typescript-react.xml
