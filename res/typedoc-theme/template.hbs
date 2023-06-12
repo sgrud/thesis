@@ -58,25 +58,25 @@
 
 {{#unless parent.parent}}
 
-\newpage
-
 {{{depth}}} [{{{name}}} {{{kind}}}]{# {{~{anchor}~}} }
 `\index{`{=tex}{{{name}}}@\textbf{ {{~{name}~}} }`!`{=tex}{{{parents}}}`}`{=tex}
 
 {{else}}{{!unless parent.parent}}
 
-\vspace{10mm}
+\vspace{5mm}
 
-{{{parents}}}.{{!--
+`\begin{minipage}{\textwidth}`{=tex}
 
---}}`\begin{varwidth}{\textwidth}`{=tex}
+`\textbf{`{=tex}{{{parents}}}.`}`{=tex}
 
 {{{depth}}} [{{{name}}}]{# {{~{anchor}~}} }
 `\index{`{=tex}{{{name}}}@\textbf{ {{~{name}~}} }`!`{=tex}{{{parents}}}`}`{=tex}
 
-`\end{varwidth}`{=tex}{{!--
+\color{gray}
 
---}} \textit{({{{kind}}})}
+\textit{({{{kind}}})}
+
+`\end{minipage}`{=tex}
 
 \nopagebreak
 

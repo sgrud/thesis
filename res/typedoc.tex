@@ -1,6 +1,22 @@
 \hypertarget{appendix}{%
 \chapter{Appendix}\label{appendix}}
 
+\let\subsectioncommand\subsection
+\let\subsubsectioncommand\subsubsection
+\let\paragraphcommand\paragraph
+\let\subparagraphcommand\subparagraph
+
+\makeatletter
+  \newcommand{\headingcommand}[3]{
+    \@startsection{#1}{#2}{\z@}{1sp}{1mm}{\normalfont#3\bfseries}
+  }
+\makeatother
+
+\renewcommand\subsection{\headingcommand{subsection}{2}{\large}}
+\renewcommand\subsubsection{\headingcommand{subsubsection}{3}{\normalsize}}
+\renewcommand\paragraph{\headingcommand{paragraph}{4}{\normalsize}}
+\renewcommand\subparagraph{\headingcommand{subparagraph}{5}{\normalsize}}
+
 \begin{spacing}{1}
 \begin{scriptsize}
 
@@ -8,6 +24,11 @@ $body$
 
 \end{scriptsize}
 \end{spacing}
+
+\renewcommand\subsection{\subsectioncommand}
+\renewcommand\subsubsection{\subsubsectioncommand}
+\renewcommand\paragraph{\paragraphcommand}
+\renewcommand\subparagraph{\subparagraphcommand}
 
 \newpage
 \phantomsection
