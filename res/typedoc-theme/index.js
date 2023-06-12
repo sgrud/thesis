@@ -89,9 +89,9 @@ exports.load = (app) => app.renderer.theme = new class extends MarkdownTheme {
       },
       hierarchy(param) {
         const level = Number.isInteger(param) ? param : 0;
-        const value = hierarchy.call(this, level).replace(/↳/g, '-');
+        const value = hierarchy.call(this, level);
 
-        return value.replace(/`\*\*$/gm, '`**\\nopagebreak');
+        return value.replace(/↳/g, '-');
       },
       kind() {
         const { flags, kind } = this;
