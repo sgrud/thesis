@@ -126,6 +126,22 @@
 
 {{else}}{{!ifIsReference}}
 
+{{#if type.declaration.signatures}}
+
+{{#if type.declaration.children}}
+
+**`Call signature`**\nopagebreak
+
+{{/if}}{{!if type.declaration.children}}
+
+{{#each type.declaration.signatures}}
+
+{{> template}}
+
+{{/each}}{{!each type.declaration.signatures}}
+
+{{/if}}{{!if type.declaration.signatures}}
+
 {{#if typeParameters}}
 
 **`Type parameters`**\nopagebreak
@@ -153,26 +169,6 @@
 {{/with}}{{!with type.declaration.indexSignature}}
 
 {{/if}}{{!if type.declaration.indexSignature}}
-
-{{#if type.declaration.signatures}}
-
-{{#if type.declaration.children}}
-
-**`Call signature`**\nopagebreak
-
-{{else}}{{!if type.declaration.children}}
-
-**`Type declaration`**\nopagebreak
-
-{{/if}}{{!if type.declaration.children}}
-
-{{#each type.declaration.signatures}}
-
-{{> template}}
-
-{{/each}}{{!each type.declaration.signatures}}
-
-{{/if}}{{!if type.declaration.signatures}}
 
 {{#if type.declaration.children}}
 
