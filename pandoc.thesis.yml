@@ -30,7 +30,7 @@ metadata:
   sansfont: LiberationSans
 
   toc: true
-  toc-depth: 1
+  toc-depth: 2
 
 variables:
   block-headings: true
