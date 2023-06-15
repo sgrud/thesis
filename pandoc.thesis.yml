@@ -1,6 +1,5 @@
 include-in-header: res/settings.tex
 include-after-body: dist/typedoc.tex
-resource-path: [src]
 
 citeproc: true
 cite-method: citeproc
