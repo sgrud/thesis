@@ -1,0 +1,75 @@
+name: Release Tags
+
+on:
+  workflow_run:
+    workflows:
+      - SGRUD Pages
+    types:
+      - completed
+    branches:
+      - main
+
+env:
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+jobs:
+  prepare:
+    name: Prepare
+    if: ${{github.event.workflow_run.conclusion == 'success'}}
+    runs-on: ubuntu-latest
+    outputs:
+      release_rev: ${{steps.validate-target.outputs.release_rev}}
+    steps:
+      - name: Checkout target
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          path: ./target
+
+      - name: Validate target
+        id: validate-target
+        working-directory: ./target
+        run: |
+          TAG=$(git describe --tags 2>&- | grep -oP '(?<=^rev\.)\d+$' || true)
+          test -n "$TAG" && echo ::set-output name=release_rev::$TAG || true
+
+  release:
+    name: Release
+    needs:
+      - prepare
+    if: ${{needs.prepare.outputs.release_rev}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+        with:
+          path: ./source
+          repository: sgrud/sgrud.github.io
+
+      - name: Checkout target
+        uses: actions/checkout@v3
+        with:
+          path: ./target
+
+      - name: Stage target
+        working-directory: ./target
+        run: |
+          git switch --orphan dist.${{needs.prepare.outputs.release_rev}}
+          git --git-dir ../../target/.git -C ../source/thesis add ./thesis.pdf
+          git checkout ${{github.sha}} -- ./CITATION.cff
+
+      - name: Push target
+        working-directory: ./target
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+          git commit --message ${{github.repository}}@${{github.sha}}
+          git push origin dist.${{needs.prepare.outputs.release_rev}}
+
+      - name: Create release
+        id: create-release
+        uses: actions/create-release@v1
+        with:
+          commitish: dist.${{needs.prepare.outputs.release_rev}}
+          release_name: Release rev.${{needs.prepare.outputs.release_rev}}
+          tag_name: dist.${{needs.prepare.outputs.release_rev}}
