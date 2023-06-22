@@ -75,7 +75,7 @@ exports.load = (app) => app.renderer.theme = new class extends MarkdownTheme {
       comments(comment) {
         const value = comments.call(this, comment);
 
-        return value.replace(/`\*\*$/gm, '`**\\nopagebreak');
+        return value.replace(/`\*\*$/gm, '`**\n\n`\\nopagebreak`{=tex}');
       },
       depth() {
         const value = [];

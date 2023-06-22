@@ -8,10 +8,6 @@
 \hyphenation{}
 \makeindex
 
-\makeatletter
-  \def\@idxitem{\scriptsize\par}
-\makeatother
-
 \fancyhead[LE,LO]{\MakeUppercase{\thetitle}}
 \fancyhead[RE,RO]{\leftmark}
 \fancypagestyle{plain}{}
@@ -37,3 +33,34 @@
   \renewcommand{\thetitle}{#1}
   \titlecommand{#1}
 }
+
+\makeatletter
+  \def\@idxitem{\scriptsize\par}
+
+  \newcommand{\headingcommand}[3]{
+    \@startsection{#1}{#2}{\z@}{1sp}{1mm}{\normalfont#3\bfseries}
+  }
+
+  \newcommand{\indexentry}[2]{
+    \index{#1@\textbf{#1}!#2}
+  }
+
+  \newcommand{\notablebreak}{
+    \par
+    \penalty-100
+
+    \begingroup
+      \setlength{\dimen@}{7.5\baselineskip}
+      \dimen@ii\pagegoal
+      \advance\dimen@ii-\pagetotal
+
+      \ifdim \dimen@>\dimen@ii
+        \ifdim \dimen@ii>\z@
+          \vfil
+        \fi
+
+        \break
+      \fi
+    \endgroup
+  }
+\makeatother
