@@ -18,7 +18,7 @@ jobs:
     if: ${{github.event.workflow_run.conclusion == 'success'}}
     runs-on: ubuntu-latest
     outputs:
-      release_rev: ${{steps.validate-target.outputs.release_rev}}
+      revision: ${{steps.validate-target.outputs.revision}}
     steps:
       - name: Checkout target
         uses: actions/checkout@v3
@@ -30,14 +30,14 @@ jobs:
         id: validate-target
         working-directory: ./target
         run: |
-          TAG=$(git describe --tags 2>&- | grep -oP '(?<=^rev\.)\d+$' || true)
-          test -n "$TAG" && echo ::set-output name=release_rev::$TAG || true
+          REV=$(git describe --tags 2>&- | grep -oP '(?<=^rev\.)\d+$' || true)
+          test -n "$REV" && echo ::set-output name=revision::$REV || true
 
   release:
     name: Release
     needs:
       - prepare
-    if: ${{needs.prepare.outputs.release_rev}}
+    if: ${{needs.prepare.outputs.revision}}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -54,7 +54,7 @@ jobs:
       - name: Stage target
         working-directory: ./target
         run: |
-          git switch --orphan dist.${{needs.prepare.outputs.release_rev}}
+          git switch --orphan dist.${{needs.prepare.outputs.revision}}
           git --git-dir ../../target/.git -C ../source/thesis add ./thesis.pdf
           git checkout ${{github.sha}} -- ./CITATION.cff
 
@@ -64,12 +64,17 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
           git commit --message ${{github.repository}}@${{github.sha}}
-          git push origin dist.${{needs.prepare.outputs.release_rev}}
+          git push origin dist.${{needs.prepare.outputs.revision}}
 
       - name: Create release
         id: create-release
         uses: actions/create-release@v1
         with:
-          commitish: dist.${{needs.prepare.outputs.release_rev}}
-          release_name: Release rev.${{needs.prepare.outputs.release_rev}}
-          tag_name: dist.${{needs.prepare.outputs.release_rev}}
+          commitish: dist.${{needs.prepare.outputs.revision}}
+          release_name: Release rev.${{needs.prepare.outputs.revision}}
+          tag_name: dist.${{needs.prepare.outputs.revision}}
+
+      - name: Cleanup target
+        working-directory: ./target
+        run: |
+          git push origin :refs/heads/dist.${{needs.prepare.outputs.revision}}

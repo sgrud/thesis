@@ -30,7 +30,7 @@ jobs:
           docker compose up --no-log-prefix
           cp ./dist/thesis.pdf ./README.md ./thesis
 
-      - name: Stage source
+      - name: Stage target
         working-directory: ./source
         run: |
           git --git-dir ../target/.git add -Af ./thesis
