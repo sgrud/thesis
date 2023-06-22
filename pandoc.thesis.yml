@@ -1,10 +1,12 @@
 include-in-header: res/settings.tex
 include-after-body: dist/typedoc.tex
 
-citeproc: true
-cite-method: citeproc
 pdf-engine: xelatex
 top-level-division: chapter
+
+citeproc: true
+cite-method: citeproc
+bibliography: dist/literature.bib
 
 metadata:
   lang: en

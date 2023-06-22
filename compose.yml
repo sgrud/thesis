@@ -44,10 +44,27 @@ services:
           -e '1s/.*/\n\\newpage\n\n# Test Coverage\n/;$$d' \
         >>/mnt/repo/dist/typedoc.md
 
+  citation-js:
+    <<: *service
+    depends_on: {jest: *depends}
+    image: node:latest
+    command:
+      - |
+        cd $$(mktemp -d)
+        npm pack /mnt/repo/res/bibtex-identifier
+        npm install *.tgz && npm install
+
+        npx citation-js \
+          --plugins bibtex-identifier \
+          --input /mnt/repo/CITATION.cff \
+          --output /mnt/repo/dist/literature \
+          --output-style bibtex \
+          --output-type string
+
   pandoc:
     <<: *service
     build: res/pandoc-custom
-    depends_on: {jest: *depends}
+    depends_on: {citation-js: *depends}
     image: pandoc/custom:latest
     command:
       - |

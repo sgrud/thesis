@@ -1,0 +1,83 @@
+cff-version: 1.2.0
+message: Please cite this thesis using the preferred-citation metadata.
+
+# ---------------------------------------------------------------------------- #
+
+title: The SGRUD Thesis
+authors:
+  - given-names: Philip
+    family-names: Schildkamp
+    affiliation: University of Cologne
+    email: philip.schildkamp@uni-koeln.de
+    orcid: https://orcid.org/0000-0003-0209-2837
+
+date-released: 2023-06-21
+url: https://sgrud.github.io/thesis
+repository-code: https://github.com/sgrud/thesis
+
+type: software
+license: MIT
+
+identifiers:
+  - type: other
+    value: bibtex:id:Schildkamp_2023a
+
+preferred-citation: # -------------------------------------------------------- #
+
+  title: The SGRUD Thesis
+  authors:
+    - given-names: Philip
+      family-names: Schildkamp
+      affiliation: University of Cologne
+      email: philip.schildkamp@uni-koeln.de
+      orcid: https://orcid.org/0000-0003-0209-2837
+
+  date-released: 2023-06-21
+  # doi: 10.5281/zenodo.#######
+  url: https://sgrud.github.io/thesis
+  repository-code: https://github.com/sgrud/thesis
+
+  type: thesis
+  thesis-type: Master of Arts Thesis
+  license: CC-BY-NC-SA-4.0
+  status: in-preparation
+
+  abstract: >-
+    Abstract.
+
+  identifiers:
+    - type: other
+      value: bibtex:id:Schildkamp_2023
+
+references: # ---------------------------------------------------------------- #
+
+  - title: SGRUD Client Libraries
+    authors:
+      - given-names: Philip
+        family-names: Schildkamp
+        affiliation: Codeschluss GbR
+        email: phil@codeschluss.de
+    version: v0.0.23
+    date-released: 2023-06-08
+    url: https://sgrud.github.io/client
+    repository-code: https://github.com/sgrud/client
+    type: software
+    license: MIT
+    identifiers:
+      - type: other
+        value: bibtex:id:Schildkamp_2023b
+
+  - title: SGRUD RealWorld App
+    authors:
+      - given-names: Philip
+        family-names: Schildkamp
+        affiliation: Codeschluss GbR
+        email: phil@codeschluss.de
+    date-released: 2023-06-08
+    url: https://sgrud.github.io/realworld
+    repository-code: https://github.com/sgrud/realworld
+    type: software
+    license: MIT
+    identifiers:
+      - type: other
+        value: bibtex:id:Schildkamp_2023c

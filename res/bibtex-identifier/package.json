@@ -1,0 +1,10 @@
+{
+  "name": "@citation-js/plugin-bibtex-identifier",
+  "private": true,
+  "version": "0.0.0",
+  "main": "./index.js",
+  "peerDependencies": {
+    "@citation-js/plugin-cff": "^0.6.1",
+    "citation-js": "^0.6.8"
+  }
+}
