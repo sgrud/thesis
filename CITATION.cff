@@ -34,7 +34,7 @@ preferred-citation: # -------------------------------------------------------- #
 
   version: rev.0
   date-released: 2023-06-22
-  # doi: 10.5281/zenodo.#######
+  doi: 10.5281/zenodo.8071909
   url: https://sgrud.github.io/thesis
   repository-code: https://github.com/sgrud/thesis
 
