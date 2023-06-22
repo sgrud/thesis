@@ -32,6 +32,7 @@ preferred-citation: # -------------------------------------------------------- #
       email: philip.schildkamp@uni-koeln.de
       orcid: https://orcid.org/0000-0003-0209-2837
 
+  version: rev.0
   date-released: 2023-06-22
   # doi: 10.5281/zenodo.#######
   url: https://sgrud.github.io/thesis
