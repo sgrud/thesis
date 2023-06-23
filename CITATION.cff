@@ -3,7 +3,7 @@ message: Please cite this thesis using the preferred-citation metadata.
 
 # ---------------------------------------------------------------------------- #
 
-title: The SGRUD Thesis
+title: SGRUD Thesis
 authors:
   - given-names: Philip
     family-names: Schildkamp
@@ -11,7 +11,8 @@ authors:
     email: philip.schildkamp@uni-koeln.de
     orcid: https://orcid.org/0000-0003-0209-2837
 
-date-released: 2023-06-22
+version: rev.0
+date-released: 2023-06-23
 url: https://sgrud.github.io/thesis
 repository-code: https://github.com/sgrud/thesis
 
@@ -32,8 +33,8 @@ preferred-citation: # -------------------------------------------------------- #
       email: philip.schildkamp@uni-koeln.de
       orcid: https://orcid.org/0000-0003-0209-2837
 
-  version: rev.0
-  date-released: 2023-06-22
+  version: dist.0
+  date-released: 2023-06-23
   doi: 10.5281/zenodo.8071909
   url: https://sgrud.github.io/thesis
   repository-code: https://github.com/sgrud/thesis
@@ -55,8 +56,8 @@ references: # ---------------------------------------------------------------- #
         family-names: Schildkamp
         affiliation: Codeschluss GbR
         email: phil@codeschluss.de
-    version: v0.0.23
-    date-released: 2023-06-08
+    version: v0.0.24
+    date-released: 2023-06-23
     url: https://sgrud.github.io/client
     repository-code: https://github.com/sgrud/client
     type: software
@@ -71,7 +72,7 @@ references: # ---------------------------------------------------------------- #
         family-names: Schildkamp
         affiliation: Codeschluss GbR
         email: phil@codeschluss.de
-    date-released: 2023-06-08
+    date-released: 2023-06-23
     url: https://sgrud.github.io/realworld
     repository-code: https://github.com/sgrud/realworld
     type: software
@@ -79,3 +80,18 @@ references: # ---------------------------------------------------------------- #
     identifiers:
       - type: other
         value: bibtex:id:Schildkamp_2023c
+
+  - title: SGRUD-compatible Skeletons
+    authors:
+      - given-names: Philip
+        family-names: Schildkamp
+        affiliation: Codeschluss GbR
+        email: phil@codeschluss.de
+    date-released: 2023-06-23
+    url: https://sgrud.github.io/skeletons
+    repository-code: https://github.com/sgrud/skeletons
+    type: software
+    license: MIT
+    identifiers:
+      - type: other
+        value: bibtex:id:Schildkamp_2023d
