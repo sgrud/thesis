@@ -3,6 +3,7 @@ include-after-body: dist/typedoc.tex
 
 pdf-engine: xelatex
 top-level-division: chapter
+from: markdown+abbreviations
 
 citeproc: true
 cite-method: citeproc
