@@ -65,12 +65,16 @@ services:
     <<: *service
     build: res/pandoc-custom
     depends_on: {citation-js: *depends}
-    image: pandoc/custom:latest
+    image: pandoc/latex:latest
     command:
       - |
+        apk add font-liberation
         FILES=$$(find src -name '*.md' | sort)
 
-        pandoc -d pandoc.typedoc.yml dist/typedoc.md
+        wget -O- github.com/kde/syntax-highlighting/archive/master.tar.gz \
+          | tar xz -C /opt --strip-components 2 --wildcards '*/data/syntax'
+
+        pandoc -d pandoc.typedoc.yml --verbose dist/typedoc.md
         pandoc -d pandoc.thesis.yml -o dist/thesis.tex $$FILES
         xelatex -no-pdf -output-directory dist dist/thesis.tex
         xelatex -no-pdf -output-directory dist dist/thesis.tex
