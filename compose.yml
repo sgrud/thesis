@@ -57,7 +57,7 @@ services:
         npx citation-js \
           --plugins bibtex-identifier \
           --input /mnt/repo/CITATION.cff \
-          --output /mnt/repo/dist/literature \
+          --output /mnt/repo/dist/thesis \
           --output-style bibtex \
           --output-type string
 

@@ -6,7 +6,7 @@ top-level-division: chapter
 
 citeproc: true
 cite-method: citeproc
-bibliography: dist/literature.bib
+bibliography: dist/thesis.bib
 
 metadata:
   lang: en
