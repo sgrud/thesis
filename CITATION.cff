@@ -56,8 +56,8 @@ references: # ---------------------------------------------------------------- #
         family-names: Schildkamp
         affiliation: Codeschluss GbR
         email: phil@codeschluss.de
-    version: v0.0.24
-    date-released: 2023-06-23
+    version: v0.0.26
+    date-released: 2023-12-13
     url: https://sgrud.github.io/client
     repository-code: https://github.com/sgrud/client
     type: software
@@ -72,7 +72,8 @@ references: # ---------------------------------------------------------------- #
         family-names: Schildkamp
         affiliation: Codeschluss GbR
         email: phil@codeschluss.de
-    date-released: 2023-06-23
+    version: 9a89b83
+    date-released: 2023-12-13
     url: https://sgrud.github.io/realworld
     repository-code: https://github.com/sgrud/realworld
     type: software
@@ -87,7 +88,8 @@ references: # ---------------------------------------------------------------- #
         family-names: Schildkamp
         affiliation: Codeschluss GbR
         email: phil@codeschluss.de
-    date-released: 2023-06-23
+    version: 3f9e514
+    date-released: 2023-12-13
     url: https://sgrud.github.io/skeletons
     repository-code: https://github.com/sgrud/skeletons
     type: software
