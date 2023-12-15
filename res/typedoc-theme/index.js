@@ -109,10 +109,10 @@ exports.load = (app) => app.renderer.theme = new class extends MarkdownTheme {
         return value.join('.') || 'global';
       },
       signature(prefix) {
-        const index = this.parent.flags.reduce((i, j) => i + j.length + 2, 0);
+        const index = this.parent?.flags.reduce((i, j) => i + j.length + 2, 0);
         const value = signatureTitle.call(this, prefix);
 
-        return value.substring(index + this.parent.flags.length);
+        return value.substring(index + this.parent?.flags.length);
       },
       type(collapse, emphasis) {
         const value = type.call(this, collapse, emphasis);
