@@ -14,7 +14,6 @@ metadata:
   documentclass: report
   classoption:
     - notitlepage
-    # - twoside
 
   geometry:
     - a4paper
@@ -22,7 +21,6 @@ metadata:
     - bottom=25mm
     - inner=25mm
     - outer=25mm
-    # - bindingoffset=10mm
     - headheight=5.25mm
 
   fontsize: 12pt
