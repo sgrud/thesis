@@ -5,8 +5,8 @@ message: Please cite this thesis using the preferred-citation metadata.
 
 title: SGRUD Thesis
 authors:
-  - given-names: Philip
-    family-names: Schildkamp
+  - family-names: Schildkamp
+    given-names: Philip
     affiliation: University of Cologne
     email: philip.schildkamp@uni-koeln.de
     orcid: https://orcid.org/0000-0003-0209-2837
@@ -27,8 +27,8 @@ preferred-citation: # -------------------------------------------------------- #
 
   title: The SGRUD Thesis
   authors:
-    - given-names: Philip
-      family-names: Schildkamp
+    - family-names: Schildkamp
+      given-names: Philip
       affiliation: University of Cologne
       email: philip.schildkamp@uni-koeln.de
       orcid: https://orcid.org/0000-0003-0209-2837
@@ -52,8 +52,8 @@ references: # ---------------------------------------------------------------- #
 
   - title: SGRUD Client Libraries
     authors:
-      - given-names: Philip
-        family-names: Schildkamp
+      - family-names: Schildkamp
+        given-names: Philip
         affiliation: Codeschluss GbR
         email: phil@codeschluss.de
     version: v0.0.26
@@ -68,11 +68,11 @@ references: # ---------------------------------------------------------------- #
 
   - title: SGRUD RealWorld App
     authors:
-      - given-names: Philip
-        family-names: Schildkamp
+      - family-names: Schildkamp
+        given-names: Philip
         affiliation: Codeschluss GbR
         email: phil@codeschluss.de
-    version: 9a89b83
+    commit: 9a89b83
     date-released: 2023-12-13
     url: https://sgrud.github.io/realworld
     repository-code: https://github.com/sgrud/realworld
@@ -84,11 +84,11 @@ references: # ---------------------------------------------------------------- #
 
   - title: SGRUD-compatible Skeletons
     authors:
-      - given-names: Philip
-        family-names: Schildkamp
+      - family-names: Schildkamp
+        given-names: Philip
         affiliation: Codeschluss GbR
         email: phil@codeschluss.de
-    version: 3f9e514
+    commit: 3f9e514
     date-released: 2023-12-13
     url: https://sgrud.github.io/skeletons
     repository-code: https://github.com/sgrud/skeletons
