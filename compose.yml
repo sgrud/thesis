@@ -75,7 +75,7 @@ services:
         wget -O- github.com/kde/syntax-highlighting/archive/master.tar.gz \
           | tar xz -C /opt --strip-components 2 --wildcards '*/data/syntax'
 
-        perl -lne 'print "\\DeclareAcronym{@{[lc$$1]}}{short=$$1,long=$$2}"
+        perl -lne'print"\\DeclareAcronym{@{[lc$$1]}}{short=$$1,long={$$2}}"
           if/^\*\[([^]]+)\]: (.+)$/' $$FILES | sort | uniq >dist/thesis.acr
 
         pandoc -d pandoc.typedoc.yml --verbose dist/typedoc.md
